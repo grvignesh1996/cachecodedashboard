@@ -1,0 +1,29 @@
+.btn-nav {
+  background-color: #dbdbdb;
+  width: 120px;
+  outline: none;
+  color: #404040;
+  font-weight: 500;
+  font-size: 0.9rem;
+}
+
+.btn-nav:hover {
+  background-color: white;
+  box-shadow: 1px 1px 5px 1px #dedede;
+  border: 1px solid #404040;
+}
+
+.btn-submit {
+  background-color: #3b903b;
+  color: white;
+  font-weight: 500;
+  width: 120px;
+  font-size: 0.9rem;
+}
+
+.btn-submit:hover {
+  color: #3b903b;
+  background-color: white;
+  box-shadow: 1px 1px 5px 1px #dedede;
+  border: 1px solid #3b903b;
+}

@@ -1,0 +1,61 @@
+.addItem_table {
+  table-layout: fixed;
+  width: 100%;
+
+  thead {
+    font-size: 0.9rem;
+  }
+
+  th,
+  td {
+    padding: 0.5rem;
+  }
+
+  th {
+    background-color: #f6f6f6;
+    color: #404040;
+  }
+
+  th:not(:last-child) {
+    border-right: 2px solid white;
+  }
+
+  th:not(:first-child),
+  td:not(:first-child) {
+    text-align: center;
+  }
+
+  th:first-child {
+    width: 300px;
+  }
+
+  td {
+    border-bottom: 1px solid #f0efef;
+  }
+
+  td,
+  input {
+    text-transform: capitalize;
+    font-size: 0.9rem;
+  }
+
+  p {
+    margin: 0;
+    font-size: 0.9rem;
+    font-weight: bold;
+  }
+
+  .add-btn {
+    background-color: white;
+    border: 1px solid #b26d0d;
+    color: #b26d0d;
+    font-size: 0.9rem;
+    font-weight: 500;
+  }
+
+  .add-btn:hover {
+    box-shadow: 1px 1px 5px 1px #dedede;
+    background-color: #fcc67a;
+    border-color: transparent;
+  }
+}
