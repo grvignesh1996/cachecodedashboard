@@ -13,11 +13,11 @@ const BasicElements = () => {
     email: "hello@123.com",
     cafeItemRequests: [],
     mobileNo: null,
-    billDate: null,
-    total: 20,
+    // billDate: null,
+    total: 0,
     // vehicleNo: "tn23",
     customerName: "",
-    shopNumber: 0,
+    shopNumber: 1,
   };
   const [postBill, setPostBill] = useState(postBillBody);
   const LINE_ITEM = {
@@ -31,7 +31,7 @@ const BasicElements = () => {
   const [data, setData] = useState([LINE_ITEM]);
   const [currPage, setCurrPage] = useState(1);
   const [itemExist, setItemExist] = useState(false);
-  const history = useHistory();
+  // const history = useHistory();
 
   const handleNav = () => {
     if (currPage === 1) {
