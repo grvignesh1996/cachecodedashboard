@@ -45,12 +45,17 @@
     font-weight: bold;
   }
 
+  select {
+    color: #404040;
+  }
+
   .add-btn {
     background-color: white;
     border: 1px solid #b26d0d;
     color: #b26d0d;
     font-size: 0.9rem;
     font-weight: 500;
+    width: 100px;
   }
 
   .add-btn:hover {

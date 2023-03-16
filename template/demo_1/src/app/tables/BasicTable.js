@@ -75,13 +75,13 @@ function BasicTable() {
                                       </tr>
                                     </thead>
                                     <tbody>
-                                      {res?.itemsEntityList?.map((item) => {
+                                      {res?.cafeItemRequests?.map((item) => {
                                         return (
                                           <tr>
                                             <td>{item.itemsNo}</td>
                                             <td>{item.itemName}</td>
                                             <td>{item.quantity}</td>
-                                            <td>{item.eachItemAmount}</td>
+                                            <td>{item.amount}</td>
                                             <td>{item.totalAmount}</td>
                                           </tr>
                                         );
