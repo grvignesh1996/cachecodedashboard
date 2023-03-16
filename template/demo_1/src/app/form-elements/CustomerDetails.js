@@ -24,23 +24,27 @@ export const CustomerDetails = ({ postBill, handleFormData, postBillBody }) => {
 
       <Form.Group>
         <label htmlFor="exampleInputName1">Customer Name</label>
-        <Form.Control type="text" className="form-control" id="exampleInputName1" placeholder="name" name="name" value={postBill.name} onChange={handleFormData} />
+        <Form.Control type="text" className="form-control" id="exampleInputName1" placeholder="Customer Name" name="customerName" value={postBill.customerName} onChange={handleFormData} />
       </Form.Group>
       <Form.Group>
         <label htmlFor="exampleInputEmail3">Email address</label>
         <Form.Control type="email" className="form-control" id="exampleInputEmail3" placeholder="Email" value={postBill.email} name="email" onChange={handleFormData} />
       </Form.Group>
-      <Form.Group>
+      {/* <Form.Group>
         <label htmlFor="exampleInputEmail3">Address</label>
         <Form.Control type="text" className="form-control" id="exampleInputEmail3" placeholder="Address" name="address" value={postBill.address} onChange={handleFormData} />
-      </Form.Group>
-      <Form.Group>
+      </Form.Group> */}
+      {/* <Form.Group>
         <label htmlFor="exampleInputEmail3">vehicleNo</label>
         <Form.Control type="text" className="form-control" id="exampleInputEmail3" placeholder="vehicleNo" name="vehicleNo" value={postBill.vehicleNo} onChange={handleFormData} />
-      </Form.Group>
+      </Form.Group> */}
       <Form.Group>
         <label htmlFor="exampleInputPassword4">Mobile No</label>
         <Form.Control type="number" className="form-control" id="exampleInputPassword4" placeholder="number" value={postBill.mobileNo} name="mobileNo" onChange={handleFormData} />
+      </Form.Group>
+      <Form.Group>
+        <label htmlFor="exampleInputName1">Shop No</label>
+        <Form.Control type="number" className="form-control" id="exampleInputName1" placeholder="Shop No" name="shopNumber" value={postBill.shopNumber} onChange={handleFormData} />
       </Form.Group>
       <Form.Group>
         <label htmlFor="exampleInputPassword4">Date</label>

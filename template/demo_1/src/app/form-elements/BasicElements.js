@@ -4,25 +4,29 @@ import { useHistory } from "react-router-dom";
 import AddItem from "./AddItem";
 import { CustomerDetails } from "./CustomerDetails";
 import "./BasicElements.scss";
+import { addItems } from "../services/apiServices";
 
 const BasicElements = () => {
   const postBillBody = {
-    address: "bangalore",
-    createdTimeStamp: 12,
+    // address: "bangalore",
+    // createdTimeStamp: 12,
     email: "hello@123.com",
-    itemsEntityList: [],
-    mobileNo: 799,
-    billDate: 9847,
+    cafeItemRequests: [],
+    mobileNo: null,
+    billDate: null,
     total: 20,
-    vehicleNo: "tn23",
-    name: "viggi boy",
+    // vehicleNo: "tn23",
+    customerName: "",
+    shopNumber: 0,
   };
   const [postBill, setPostBill] = useState(postBillBody);
   const LINE_ITEM = {
+    id: "",
     itemName: "",
     quantity: "",
-    eachItemAmount: "",
+    amount: "",
     totalAmount: "",
+    gst: "",
   };
   const [data, setData] = useState([LINE_ITEM]);
   const [currPage, setCurrPage] = useState(1);
@@ -37,9 +41,9 @@ const BasicElements = () => {
     }
   };
 
-  const postCreateBill = (e) => {
+  const postCreateBill = async (e) => {
     e.preventDefault();
-    let itemsList = [...postBill.itemsEntityList];
+    let itemsList = [...postBill.cafeItemRequests];
 
     data.forEach((item, _) => {
       let isEmpty = false;
@@ -54,19 +58,36 @@ const BasicElements = () => {
         itemsList.push(item);
       }
     });
-    let temp = { ...postBill };
-    temp.itemsEntityList = itemsList;
-    setPostBill(temp);
-    axios.post("http://localhost:8080/bms/createBill", temp);
-    setData([LINE_ITEM]);
-    history.push("/");
+
+    let totalAmount = 0;
+    for (let i = 0; i < itemsList.length; i++) {
+      console.log(itemsList[i]);
+      totalAmount += +itemsList[i].totalAmount;
+    }
+
+    let cafeCartRequest = { ...postBill };
+    cafeCartRequest.cafeItemRequests = itemsList;
+    cafeCartRequest.total = totalAmount;
+
+    setPostBill(cafeCartRequest);
+    try {
+      const response = await addItems(cafeCartRequest);
+      // axios.post("http://localhost:8080/bms/createBill", cafeCartRequest);
+      console.log(response);
+      setData([LINE_ITEM]);
+      // history.push("/");
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   const handleFormData = (e) => {
     // let temp = {...postBill}
     // temp[e.target.name] = e.target.value
     if (e.target.name === "mobileNo") {
-      if (e.target.value.length <= 10) setPostBill({ ...postBill, [e.target.name]: e.target.value });
+      if (e.target.value.length <= 10) setPostBill({ ...postBill, [e.target.name]: +e.target.value });
+    } else if (e.target.name === "shopNumber") {
+      setPostBill({ ...postBill, [e.target.name]: +e.target.value });
     } else {
       setPostBill({ ...postBill, [e.target.name]: e.target.value });
     }
