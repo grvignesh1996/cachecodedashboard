@@ -18,8 +18,6 @@ const AddItem = ({ data, setData, LINE_ITEM, setItemExist }) => {
       }
     }
 
-    console.log(data[index]);
-
     if (!isEmpty && data[index].itemName !== "default") {
       let temp = [...data];
       temp.push(LINE_ITEM);
@@ -35,8 +33,6 @@ const AddItem = ({ data, setData, LINE_ITEM, setItemExist }) => {
 
     if (keyIndex === "itemName" && event.target.value !== "default") {
       const itemSelected = allItems.filter((ele) => ele.id === +event.target.value);
-      console.log(itemSelected[0]);
-
       temp[listItemIndex]["id"] = itemSelected[0].id;
       temp[listItemIndex][keyIndex] = itemSelected[0].itemName;
       temp[listItemIndex]["quantity"] = "";
@@ -66,7 +62,6 @@ const AddItem = ({ data, setData, LINE_ITEM, setItemExist }) => {
   const getItemsList = async () => {
     try {
       const response = await getAllItems();
-      console.log(response);
       setAllItems(response.data);
     } catch (error) {
       console.log(error);

@@ -22,18 +22,18 @@ body {
   @include flex-direction(row);
   padding-left: 0;
   padding-right: 0;
+}
 
-  &.full-page-wrapper {
-    min-height: 100vh;
-    padding-top: 0;
-    .main-panel {
-      width: 100%;
-      transition: none;
-      .content-wrapper {
-        padding: 0;
-        > div {
-          height: 100%;
-        }
+.full-page-wrapper {
+  min-height: 100vh;
+  padding: 0 !important;
+  .main-panel {
+    width: 100%;
+    transition: none;
+    .content-wrapper {
+      padding: 0;
+      > div {
+        height: 100%;
       }
     }
   }

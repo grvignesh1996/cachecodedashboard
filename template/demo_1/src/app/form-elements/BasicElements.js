@@ -1,12 +1,14 @@
-import axios from "axios";
 import React, { useEffect, useState } from "react";
-import { useHistory } from "react-router-dom";
 import AddItem from "./AddItem";
 import { CustomerDetails } from "./CustomerDetails";
 import "./BasicElements.scss";
 import { addItems } from "../services/apiServices";
+import { useNavigate } from "react-router-dom";
+import { Success } from "../shared/Success";
 
 const BasicElements = () => {
+  const navigate = useNavigate();
+  const [userData, setUserData] = useState();
   const postBillBody = {
     // address: "bangalore",
     // createdTimeStamp: 12,
@@ -17,9 +19,9 @@ const BasicElements = () => {
     total: 0,
     // vehicleNo: "tn23",
     customerName: "",
-    shopNumber: 1,
+    shopNumber: 0,
   };
-  const [postBill, setPostBill] = useState(postBillBody);
+  const [postBill, setPostBill] = useState({ ...postBillBody });
   const LINE_ITEM = {
     id: "",
     itemName: "",
@@ -31,6 +33,8 @@ const BasicElements = () => {
   const [data, setData] = useState([LINE_ITEM]);
   const [currPage, setCurrPage] = useState(1);
   const [itemExist, setItemExist] = useState(false);
+  const [successInfo, setSuccessInfo] = useState(false);
+  const [successData, setSuccessData] = useState();
   // const history = useHistory();
 
   const handleNav = () => {
@@ -61,21 +65,20 @@ const BasicElements = () => {
 
     let totalAmount = 0;
     for (let i = 0; i < itemsList.length; i++) {
-      console.log(itemsList[i]);
       totalAmount += +itemsList[i].totalAmount;
     }
 
     let cafeCartRequest = { ...postBill };
     cafeCartRequest.cafeItemRequests = itemsList;
     cafeCartRequest.total = totalAmount;
+    cafeCartRequest.shopNumber = userData?.id;
 
     setPostBill(cafeCartRequest);
     try {
       const response = await addItems(cafeCartRequest);
-      // axios.post("http://localhost:8080/bms/createBill", cafeCartRequest);
-      console.log(response);
+      setSuccessInfo(true);
+      setSuccessData(response.data);
       setData([LINE_ITEM]);
-      // history.push("/");
     } catch (error) {
       console.log(error);
     }
@@ -95,9 +98,23 @@ const BasicElements = () => {
 
   useEffect(() => {
     // console.log(data);
+    let user = JSON.parse(localStorage.getItem("cacheCode_UserData"));
+    setUserData(user);
+
+    if (user === null) {
+      navigate("/login");
+    }
   }, [data]);
+
+  const closeSuccess = () => {
+    setSuccessInfo(false);
+    setCurrPage(1);
+    setSuccessData();
+    setItemExist();
+    setPostBill({ ...postBillBody });
+  };
   return (
-    <div>
+    <div style={{ marginTop: "12vh", minHeight: "72vh" }}>
       <div className="page-header">
         <h3 className="page-title"> CREATE INVOICE </h3>
       </div>
@@ -126,6 +143,8 @@ const BasicElements = () => {
           </div>
         </div>
       </div>
+
+      {successInfo && successData && <Success printData={successData} closeSuccess={closeSuccess} />}
     </div>
   );
 };

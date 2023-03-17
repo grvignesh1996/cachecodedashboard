@@ -16,3 +16,8 @@ export const addItems = async (body) => {
   const result = await axios.post(`${Base_URL}/cafe/addItems`, body);
   return result;
 };
+
+export const getAllBillsByPage = async (params) => {
+  const result = await axios.get(`${Base_URL}/cafe/getAllBillByPage`, { params: params });
+  return result;
+};

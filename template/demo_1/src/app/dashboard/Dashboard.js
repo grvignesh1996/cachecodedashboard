@@ -1,7 +1,19 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 const Dashboard = () => {
+  const navigate = useNavigate();
+  const [userData, setUserData] = useState();
+
+  useEffect(() => {
+    let user = JSON.parse(localStorage.getItem("cacheCode_UserData"));
+    setUserData(user);
+
+    if (user === null) {
+      navigate("/login");
+    }
+  }, []);
   return (
-    <div>
+    <div style={{ marginTop: "12vh" }}>
       <div className="page-header">
         <h3 className="page-title">
           <span className="page-title-icon bg-gradient-primary text-white mr-2">

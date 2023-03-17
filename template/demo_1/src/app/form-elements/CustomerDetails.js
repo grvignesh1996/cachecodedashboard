@@ -1,7 +1,5 @@
-import React, { Fragment, useState } from "react";
+import React, { Fragment } from "react";
 import { Form } from "react-bootstrap";
-import DatePicker from "react-datepicker";
-import moment from "moment";
 
 export const CustomerDetails = ({ postBill, handleFormData, postBillBody }) => {
   // const [startDate, setStartDate] = useState(new Date());
